@@ -1,0 +1,22 @@
+% TODOs package
+\usepackage{todonotes}
+\usepackage{pdfcomment} % http://ctan.org/pkg/pdfcomment
+
+% TODOs
+\ifthenelse{1=0}{
+    % plaintask is just a normal todo item
+    \newcommand{\plaintask}[2][]{
+      \todo[color=red, size=\tiny, #1]{#2}
+    }
+
+    % newtask is a combination of the a colored piece of normal text, a todo, and a the tooltip
+    \newcommand{\newtodo}[2]{
+      \pdftooltip{\textcolor{red}{#1}}{#2}
+      \todo[color=white,bordercolor=white,linecolor=white,backgroundcolor=white,size=\tiny,textcolor=white]{#1:  #2}
+    }
+}{
+    % plaintask is just a normal todo item
+    \newcommand{\plaintask}[2][]{\ }
+
+    % newtask is a combination of the a colored piece of normal text, a todo, and a the tooltip
+    \newcommand{\newtodo}[2]{\ }
