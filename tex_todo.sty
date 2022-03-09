@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%
+% TODOs package
+% 
+% usage: \newtodo{inline text}{mouseover text} to create a task and have the inline text appear red in the text
+%        \listoftodos at the end of your document (but before \end{document}) to generate the table of tasks
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tex_todo}[2022/03/09 Latex task package]
+
+% These are required for the package
+\RequirePackage{todonotes}
+\RequirePackage{pdfcomment} % http://ctan.org/pkg/pdfcomment
+
+% 
+\usepackage{ifthen}
+
+% We create a boolean to store whether to hide all the notes or not
+\newboolean{@hide}
+\setboolean{@hide}{false}
+
+\newboolean{@hidestate}
+\setboolean{@hidestate}{false}
+
+% Create options to set the value
+\DeclareOption{hide}{\setboolean{@hidestate}{true}}
+\DeclareOption*{\PackageWarning{examplepackage}{Unknown ‘\CurrentOption’}}
+
+% Process the options
+\ProcessOptions%
+
+% TODOs Define the commands
+\ifthenelse{\boolean{@hidestate}}{
+    % plaintask is just a normal todo item
+    \newcommand{\plaintask}[2][]{\ }
+
+    % newtask is a combination of the a colored piece of normal text, a todo, and a the tooltip
+    \newcommand{\newtodo}[2]{\ }
+
+    % override the listoftodos command
+    \renewcommand{\listoftodos}{\ }
+    %\renewcommand{\listtodotitle}{To-do list}
+    \def\listtodoname{List of Todos}
+}{
+    % plaintask is just a normal todo item
+    \newcommand{\plaintask}[2][]{
+      \todo[color=red, size=\tiny, #1]{#2}
+    }
+
+    % newtask is a combination of the a colored piece of normal text, a todo, and a the tooltip
+    \newcommand{\newtodo}[2]{
+      \pdftooltip{\textcolor{red}{#1}}{#2}
+      \todo[color=white,bordercolor=white,linecolor=white,backgroundcolor=white,size=\tiny,textcolor=white]{#1:  #2}
+    }
+}
