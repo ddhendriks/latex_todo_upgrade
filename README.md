@@ -52,6 +52,11 @@ To display the entire list of tasks:
 \listoftodos
 ```
 
+## Example documents:
+An example document with the tasks: [example](example/main.pdf)
+An example document with everything hidden: [example hide](example/main_hide.pdf)
+
+
 ## Note
 Not all pdf viewers seem to handle the mouseover functionality. The ones that worked for me were:
 - acroread
