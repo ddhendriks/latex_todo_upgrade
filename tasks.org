@@ -1,2 +1,5 @@
 * Tasks
 ** TODO add questions and comments, and their lists
+** TODO Add questions and their own list
+** TODO Add comments and their own list
+** TODO Add optional arguments that contains the author
